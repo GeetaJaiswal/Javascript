@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: cornflowerblue;
+}
+
+.top-div {
+    width: 100%;
+}
+
+
+h1 {
+    margin: 0;
+    font-family: cursive;
+    font-size: 50px;
+    color: antiquewhite;
+}
+
+textarea {
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    border: 5px solid #9cdff3;
+    outline:none;
+    padding: 40px;
+}
+

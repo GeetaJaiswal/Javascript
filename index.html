@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css"/>
+    <title>Typing Test</title>
+</head>
+
+
+
+<body>
+    <div class="col-lg-3 top-div"></div>
+        <div class="col-lg-6 m-auto text-center mt-5">
+            <h1>Typing Speed Test</h2>
+            <br>
+            <h6 id="msg"></h6>
+            <textarea rows="10" placeholder="type here...." id="usertext" disabled></textarea>
+            <br><br>
+            <button class="btn btn-success w-25" id="btn">Start</button>
+        </div>
+    <div class="col-lg-3"></div>
+    
+
+<script>
+
+    const typedMsg = ["It is a long established fact that a reader will be distracted by the readable content of a.",
+                       "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters",              
+                       "as opposed to using 'Content here, content here', making it look like readable English.",
+                       "Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
+                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                       "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                       "The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. ",
+                    ];
+    
+    
+                       const msg = document.getElementById("msg");
+    const usertext = document.getElementById("usertext");
+    const btn = document.getElementById("btn");
+    let starttime;
+    let endtime;
+
+
+    const textDisplay = () => {
+        let randomNumber = Math.floor(Math.random()*typedMsg.length);
+        // console.log(randomNumber);
+        msg.innerText = typedMsg[randomNumber];
+        btn.innerText = "Done";
+        let date = new Date();
+        starttime = date.getTime();
+    }
+
+    const endPlay = () => {
+        let date = new Date();
+        endtime = date.getTime();
+        totaltime = ((endtime - starttime)/1000);
+        // console.log(totaltime);
+
+        let userTotalstr = usertext.value;
+        // console.log(userTotalstr);
+        let wordCount = wordCounter(userTotalstr);
+        // console.log(wordCount);
+        let speed = Math.round((wordCount/totaltime)*60);
+        // console.log(speed);
+        let finalmsg = `You typed total ${speed} words per minute`;
+        finalmsg += compareWords(msg.innerText,userTotalstr);
+        msg.innerText = finalmsg;
+    }
+
+    const compareWords = (givenWords, typedWords) => {
+        givenWords = givenWords.split(" ");
+        // console.log(givenWords);
+        typedWords = typedWords.split(" ");
+        let count = 0;
+
+        givenWords.forEach(function(item,index) {
+            if(item==typedWords[index]) {
+                count++;
+            }
+        });
+
+        let errorWords = givenWords.length - count;
+        msg.setAttribute("style","color:red;");
+        return ` ${count} correct out of ${givenWords.length} words and the total number of error is ${errorWords}.`;
+    }
+
+    const wordCounter = (userTotalstr) => {
+        let response = userTotalstr.split(" ").length;
+        // console.log(response);
+        return response;
+    }
+
+    btn.addEventListener('click',function() {
+        if(this.innerText =='Start') {
+            usertext.disabled = false;
+            textDisplay();
+        }
+        else if(this.innerText == 'Done') {
+            usertext.disabled = true;
+            btn.innerText = "Done";
+            endPlay();
+        }
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+<!-- // steps :- 
+
+// 1. when user press START btn then active textarea else disable it.
+// 2. Everytime a new set of lines on top to write, whenever start btn is pressed.
+// 3. get the time and change the btn text to done.
+// 4. get the end time when user press the done btn. find the total time taken.
+// 5. find the total words on the set of words.
+// 6. find the speed of user.
+// 7. now call the comparewords function and find no. of words which are correct and incorrect.
+// 8. display result with time, speed and words (correct + incorrect).  -->
