@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding : 0;
+    width: 100%;
+    background-color:thistle;
+}
+
+img {
+    width:200px;
+}
+
+.dice1, .dice2 {
+    display: inline-block;
+    text-align: center;
+}
+
+h1 {
+    bottom: 50%;
+    color: yellow;
+    text-shadow: 3px 2px skyblue;
+    font-size: 90px;
+}
+
+p {
+    color: black;
+    font-weight: 700;
+    font-size: 20px;
+}
+

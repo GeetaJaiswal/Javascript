@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css"/>
+    <title>Ludo</title>
+</head>
+<body>
+
+    <div class="container m-auto w-75 text-center mt-5">
+        <h1 class="mb-5">Player 1 won!</h1>
+
+        <div class="dice1">
+            <p>Player 1</p>
+            <img src="images/dice1.png" id="fdice">
+        </div>
+
+        <div class="dice2">
+            <p>Player 2</p>
+            <img src="images/dice6.png" id="sdice">
+        </div>
+    </div>
+
+    <div class="m-auto w-75 text-center mt-5">
+    <button class="btn btn-success px-5" onclick="ludogame()">START</button>
+    </div>
+
+
+    <script>
+        const ludogame = () => {
+            const play1 = Math.floor(Math.random()*6)+1;
+            const playfdice = `images/dice${play1}.png`;
+            document.getElementById('fdice').setAttribute('src', playfdice);
+
+            const play2 = Math.floor(Math.random()*6)+1;
+            const playsdice = `images/dice${play2}.png`;
+            document.getElementById('sdice').setAttribute('src', playsdice);
+
+            if(play1 > play2) {
+                document.querySelector('h1').innerHTML = "Player 1 is won";
+            }
+            else if(play1 < play2) {
+                document.querySelector('h1').innerHTML = "Player 2 is won";
+            }
+            else {
+                document.querySelector('h1').innerHTML = "DRAW";
+            }
+        }
+    </script>
+
+</body>
+</html>
